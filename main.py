@@ -25,17 +25,8 @@ WHITE = (255,255,255)
 #Set up fonts
 basicFont = pygame.font.SysFont(None, 48)
 
-#Set up the text
-text = basicFont.render('HELLO WORLD', True, WHITE)
-textRect = text.get_rect()
-textRect.centerx = windowSurface.get_rect().centerx
-textRect.centery = windowSurface.get_rect().centery
-
 #Draw the white background onto the surface
 windowSurface.fill(BLUE)
-
-#Draw the text onto the surface
-windowSurface.blit(text,textRect)
 
 #Set up taskbar
 taskbar = Taskbar(windowSurface, BLACK, vw, 48)
