@@ -1,17 +1,19 @@
 import pygame, sys
 from pygame.locals import *
 
+from system.taskbar.Taskbar import Taskbar
+
 #Set up pygame
 pygame.init()
 
 #Set up the window
-vw = pygame.display.Info().current_w;
-vh = pygame.display.Info().current_h;
+vw = pygame.display.Info().current_w
+vh = pygame.display.Info().current_h
 
 # windowSurface = pygame.display.set_mode((vw, vh), pygame.NOFRAME)
 windowSurface = pygame.display.set_mode((vw, vh))
 
-pygame.display.set_caption('Hello World')
+pygame.display.set_caption('Playtop')
 
 #Set up the colors
 BLACK = (0,0,0)
@@ -32,11 +34,12 @@ textRect.centery = windowSurface.get_rect().centery
 #Draw the white background onto the surface
 windowSurface.fill(BLUE)
 
-#Draw a blue poligon onto the surface
-pygame.draw.rect(windowSurface, BLACK, pygame.Rect(0, 0, vw, 48));
-
 #Draw the text onto the surface
 windowSurface.blit(text,textRect)
+
+#Set up taskbar
+taskbar = Taskbar(windowSurface, BLACK, vw, 48)
+taskbar.draw()
 
 #Draw the window onto the screen
 pygame.display.update()
