@@ -1,5 +1,6 @@
 import pygame
 from .widgets.battery import Battery
+from datetime import datetime
 
 class Taskbar: 
     def __init__(self, ws, col, w, h):
