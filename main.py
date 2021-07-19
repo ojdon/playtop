@@ -1,6 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 
+from system.menu.Menu import Menu
 from system.taskbar.Taskbar import Taskbar
 
 #Set up pygame
@@ -31,6 +32,8 @@ windowSurface.fill(BLUE)
 #Set up taskbar
 taskbar = Taskbar(windowSurface, BLACK, vw, 48)
 taskbar.draw()
+
+menu = Menu()
 
 #Draw the window onto the screen
 pygame.display.update()
