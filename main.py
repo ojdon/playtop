@@ -1,7 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 
-from system.menu.Menu import Menu
+from system.menu.PlaytopMenu import PlaytopMenu
 from system.taskbar.Taskbar import Taskbar
 
 #Set up pygame
@@ -33,7 +33,19 @@ windowSurface.fill(BLUE)
 taskbar = Taskbar(windowSurface, BLACK, vw, 48)
 taskbar.draw()
 
-menu = Menu()
+import sys
+
+import xdg.Menu
+import xdg.DesktopEntry
+
+def show_menu(menu, depth = 0):
+	for entry in menu.getEntries():
+		if isinstance(entry, xdg.Menu.Menu):
+			show_menu(entry, depth)
+		elif isinstance(entry, xdg.Menu.MenuEntry):
+			print(menu.getPath() + "/	" + entry.DesktopFileID + "	" + entry.DesktopEntry.getFileName())
+
+show_menu(xdg.Menu.parse())
 
 #Draw the window onto the screen
 pygame.display.update()
