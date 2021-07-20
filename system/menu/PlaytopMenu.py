@@ -5,6 +5,9 @@ import xdg.DesktopEntry
 
 
 class PlaytopMenu:
+    def __init__(self):
+        pass
+
     def show_menu(self, menu, depth=0):
         menu_list = {}
 

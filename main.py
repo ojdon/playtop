@@ -1,11 +1,18 @@
 import pygame, sys
 from pygame.locals import *
+import json
+
+system_json = open('./data/json/system.json')
+system_data = json.load(system_json)
+system_json.close()
 
 from system.menu.PlaytopMenu import PlaytopMenu
 from system.taskbar.Taskbar import Taskbar
 
 #Set up pygame
 pygame.init()
+pygame.display.set_caption('Playtop')
+pygame.display.set_icon(pygame.image.load('./assets/img/icons/logo/logo-squared.png'))
 
 #Set up the window
 vw = pygame.display.Info().current_w
@@ -14,27 +21,24 @@ vh = pygame.display.Info().current_h
 # windowSurface = pygame.display.set_mode((vw, vh), pygame.NOFRAME)
 windowSurface = pygame.display.set_mode((vw, vh))
 
-pygame.display.set_caption('Playtop')
 
 #Set up the colors
-BLACK = (0,0,0)
-RED = (255,0,0)
-GREEN = (0,255,0)
-BLUE = (0,0,255)
-WHITE = (255,255,255)
+PRIMARY = system_data['palette']['primary']
+DARK = system_data['palette']['dark']
+LIGHT = system_data['palette']['light']
 
 #Set up fonts
 basicFont = pygame.font.SysFont(None, 48)
 
-#Draw the white background onto the surface
-windowSurface.fill(BLUE)
+#Draw the background onto the surface
+windowSurface.fill(DARK)
 
 #Set up taskbar
-taskbar = Taskbar(windowSurface, BLACK, vw, 48)
+taskbar = Taskbar(windowSurface, DARK, vw, 48)
 taskbar.draw()
 
-menu = PlaytopMenu()
-menu.show_menu(menu.get_menu())
+#menu = PlaytopMenu()
+#menu.show_menu(menu.get_menu())
 
 #Draw the window onto the screen
 pygame.display.update()
