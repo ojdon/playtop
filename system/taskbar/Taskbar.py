@@ -1,6 +1,6 @@
 import pygame
 from .widgets.battery import Battery
-from datetime import datetime
+from .widgets.clock import Clock
 
 
 class Taskbar:
@@ -14,3 +14,6 @@ class Taskbar:
         pygame.draw.rect(self.ws, self.col, pygame.Rect(0, 0, self.w, self.h))
         battery_icon = Battery(self.ws, self.w - 24, self.h / 2)
         battery_icon.draw()
+
+        clock = Clock(self.ws, self.w / 2 , self.h / 2)
+        clock.draw()

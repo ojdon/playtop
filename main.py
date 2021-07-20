@@ -2,11 +2,11 @@ import pygame, sys
 from pygame.locals import *
 import json
 
+# TODO: Move this to a module
 system_json = open('./data/json/system.json')
 system_data = json.load(system_json)
 system_json.close()
 
-from system.menu.PlaytopMenu import PlaytopMenu
 from system.taskbar.Taskbar import Taskbar
 
 #Set up pygame
