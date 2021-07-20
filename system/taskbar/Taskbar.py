@@ -9,11 +9,14 @@ class Taskbar:
         self.col = col
         self.w = w
         self.h = h
+        self.clock = Clock(self.ws, self.w / 2 , self.h / 2)
+        self.battery_icon = Battery(self.ws, self.w - 24, self.h / 2)
+
+    def update(self):
+        # self.battery_icon.update()
+        self.clock.update()
 
     def draw(self):
         pygame.draw.rect(self.ws, self.col, pygame.Rect(0, 0, self.w, self.h))
-        battery_icon = Battery(self.ws, self.w - 24, self.h / 2)
-        battery_icon.draw()
-
-        clock = Clock(self.ws, self.w / 2 , self.h / 2)
-        clock.draw()
+        self.battery_icon.draw()
+        self.clock.draw()

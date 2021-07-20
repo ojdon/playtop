@@ -9,6 +9,9 @@ class Clock:
         self.y = y
         self.col = col
 
+    def update(self):
+        pass
+
     def draw(self):
         # Set up the text
         basic_font = pygame.font.SysFont(None, 24)

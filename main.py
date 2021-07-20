@@ -1,51 +1,69 @@
+from datetime import datetime
+
 import pygame, sys
 from pygame.locals import *
 import json
+import time
 
 # TODO: Move this to a module
+from system.menu.PlaytopMenu import PlaytopMenu
+
 system_json = open('./data/json/system.json')
 system_data = json.load(system_json)
 system_json.close()
 
 from system.taskbar.Taskbar import Taskbar
 
-#Set up pygame
+# Set up pygame
 pygame.init()
+
 pygame.display.set_caption('Playtop')
 pygame.display.set_icon(pygame.image.load('./assets/img/icons/logo/logo-squared.png'))
+clock = pygame.time.Clock()
 
-#Set up the window
+# Set up the window
 vw = pygame.display.Info().current_w
 vh = pygame.display.Info().current_h
 
 # windowSurface = pygame.display.set_mode((vw, vh), pygame.NOFRAME)
 windowSurface = pygame.display.set_mode((vw, vh))
 
-
-#Set up the colors
+# Set up the colors
 PRIMARY = system_data['palette']['primary']
 DARK = system_data['palette']['dark']
 LIGHT = system_data['palette']['light']
 
-#Set up fonts
-basicFont = pygame.font.SysFont(None, 48)
+# Set up fonts
+basic_font = pygame.font.SysFont(None, 48)
 
-#Draw the background onto the surface
+# Draw the background onto the surface
 windowSurface.fill(DARK)
 
-#Set up taskbar
+# Set up taskbar
 taskbar = Taskbar(windowSurface, DARK, vw, 48)
-taskbar.draw()
 
-#menu = PlaytopMenu()
-#menu.show_menu(menu.get_menu())
 
-#Draw the window onto the screen
-pygame.display.update()
+menu = PlaytopMenu()
 
-#Run the game loop
-while True:
+try:
+    menu.show_menu(menu.get_menu())
+except:
+
+    menuError = basic_font.render("Error: Unable to load menu.", True, LIGHT)
+    text_rect = menuError.get_rect()
+    text_rect.centerx = vw / 2
+    text_rect.centery = vh / 2
+
+    # Draw the text onto the surface
+    windowSurface.blit(menuError, text_rect)
+
+loop = True
+while loop:
     for event in pygame.event.get():
         if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
+                    pygame.quit()
+                    sys.exit()
+    # Update Screen.
+    taskbar.draw()
+    pygame.display.flip()
+    clock.tick(30)
