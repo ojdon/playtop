@@ -5,11 +5,15 @@ import psutil
 
 class Battery:
     def __init__(self, ws, x, y, col=(255, 255, 255)):
+        self.status = fa.icons['battery-empty']
         self.ws = ws
         self.x = x
         self.y = y
         self.col = col
 
+        self.get_status()
+
+    def get_status(self):
         battery = psutil.sensors_battery()
 
         if battery.power_plugged:
@@ -23,8 +27,10 @@ class Battery:
         elif battery.percent > 25:
             self.status = fa.icons['battery-quarter']
         else:
-            self.status = fa.icons['battery-empty']
             self.col = (255, 0, 0)
+
+    def update(self):
+        self.get_status()
 
     def draw(self):
         # Set up the text

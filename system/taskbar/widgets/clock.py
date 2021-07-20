@@ -8,15 +8,16 @@ class Clock:
         self.x = x
         self.y = y
         self.col = col
+        self.time = time.strftime("%H:%M")
 
     def update(self):
-        pass
+        self.time = time.strftime("%H:%M")
 
     def draw(self):
         # Set up the text
         basic_font = pygame.font.SysFont(None, 24)
 
-        text = basic_font.render(time.strftime("%H:%M"), True, self.col)
+        text = basic_font.render(self.time, True, self.col)
         text_rect = text.get_rect()
         text_rect.centerx = self.x
         text_rect.centery = self.y

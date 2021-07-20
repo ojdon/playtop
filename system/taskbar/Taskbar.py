@@ -13,7 +13,7 @@ class Taskbar:
         self.battery_icon = Battery(self.ws, self.w - 24, self.h / 2)
 
     def update(self):
-        # self.battery_icon.update()
+        self.battery_icon.update()
         self.clock.update()
 
     def draw(self):

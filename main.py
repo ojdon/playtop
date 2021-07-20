@@ -41,14 +41,11 @@ windowSurface.fill(DARK)
 
 # Set up taskbar
 taskbar = Taskbar(windowSurface, DARK, vw, 48)
-
-
 menu = PlaytopMenu()
 
 try:
     menu.show_menu(menu.get_menu())
 except:
-
     menuError = basic_font.render("Error: Unable to load menu.", True, LIGHT)
     text_rect = menuError.get_rect()
     text_rect.centerx = vw / 2
@@ -58,12 +55,22 @@ except:
     windowSurface.blit(menuError, text_rect)
 
 loop = True
+
+
+def update():
+    taskbar.update()
+
+def draw():
+    taskbar.draw()
+
 while loop:
     for event in pygame.event.get():
         if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
     # Update Screen.
-    taskbar.draw()
+    update()
+    draw()
+
     pygame.display.flip()
     clock.tick(30)
